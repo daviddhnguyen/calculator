@@ -4,35 +4,37 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+}
+
 .calcBody {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 10px;
+    width: 400px;
+    border: solid red 5px;
 }
 
 .display {
-    padding: 50px;
     color: blue;
     background-color: pink;
     border: solid blue 5px;
+    align-self: stretch;
+    text-align: right;
 }
 
 .buttonSect {
     display: flex;
+    gap: 5px;
+    border: solid green 5px;
+    flex-wrap: wrap;
+    flex: 0;
+    justify-content: flex-start;
 }
 
-.numberSect {
-    display: flex;
-    flex-wrap: true;
-}
-
-.operators {
-    display: flex;
-    flex-direction: column;
-}
-
-.number {
-    border: "solid red 2px";
-    padding: 10px;
+button {
+    width: 75px;
+    height: 50px;
 }
