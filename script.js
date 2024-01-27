@@ -40,9 +40,10 @@ function newDisplay() {
 
     numbers.forEach(btnNum => {
         btnNum.addEventListener('click', () => {
-            displayValue += btnNum.textContent()
+            displayValue += btnNum.textContent;
+            console.log(displayValue);
         });
     });
-
-    return displayValue
+    console.log(displayValue);
+    return displayValue;
 }
