@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.calcBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.display {
+    padding: 50px;
+    color: blue;
+    background-color: pink;
+    border: solid blue 5px;
+}
+
+.buttonSect {
+    display: flex;
+}
+
+.numberSect {
+    display: flex;
+    flex-wrap: true;
+}
+
+.operators {
+    display: flex;
+    flex-direction: column;
+}
+
+.number {
+    border: "solid red 2px";
+    padding: 10px;
+}
