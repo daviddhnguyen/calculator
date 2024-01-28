@@ -13,6 +13,8 @@ window.addEventListener('DOMContentLoaded', () => {
     newDisplay();
   });
 
+
+
 //functions
 function add(a, b) {
     return a + b;
@@ -35,15 +37,19 @@ function operate(num1, num2, operator) {
 };
 
 function newDisplay() {
-
     const numbers = document.querySelectorAll('.number');
-
+    displayValue = '';
     numbers.forEach(btnNum => {
-        btnNum.addEventListener('click', () => {
+        btnNum.addEventListener('click', () => {            
+            //verifies only one decimal is allowed per entry
+            if (btnNum.textContent !== '.' ||
+            !displayValue.includes('.')) {
             displayValue += btnNum.textContent;
-            console.log(displayValue);
+
+            document.querySelector('.display').textContent
+            = displayValue;
+            };
         });
     });
-    console.log(displayValue);
-    return displayValue;
+    return Number(displayValue);
 }
