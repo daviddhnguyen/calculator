@@ -13,8 +13,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 400px;
+    width: 335px;
     border: solid red 5px;
+    margin-top: 50px;
 }
 
 .display {
@@ -23,15 +24,6 @@ body {
     border: solid blue 5px;
     align-self: stretch;
     text-align: right;
-}
-
-.buttonSect {
-    display: flex;
-    gap: 5px;
-    border: solid green 5px;
-    flex-wrap: wrap;
-    flex: 0;
-    justify-content: flex-start;
 }
 
 button {
