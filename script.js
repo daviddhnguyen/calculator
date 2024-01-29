@@ -9,10 +9,10 @@ let operator
 let displayValue
 
 function startUp() {
-    num1 = 0;
-    num2 = 0;
-    total = 0;
-    operator = '';
+    num1 = null;
+    num2 = null;
+    total = null;
+    operator = null;
     displayValue = DEFAULT_VALUE;
 };
 
@@ -64,12 +64,17 @@ function numberInput() {
     numbers.forEach(btnNum => {
         btnNum.addEventListener('click', () => {            
             //removes initial 0 value
-            if (displayValue == 0 || (operator !== '' && operator !== '=')) {
+            if (displayValue == 0 || (operator !== null && operator !== '=')) {
                 displayValue = '';
             }
             //resets calc if last operator was = and next button was number
-            if (operator == '=') {
-                operator = '';
+            if (operator == '=' && total == null) {
+                operator = null;
+            }
+
+            if (operator == '=' && total !== null) {
+                operator = null;
+                displayValue = '';
             }
 
             //verifies only one decimal is allowed per entry
@@ -108,13 +113,13 @@ function userOperator() {
         input.addEventListener('click', () => {
             //console.log(input.textContent);
             //checks last operator and current operator input
-            if (operator == '' && input.textContent !== '=') {
+            if (operator == null && input.textContent !== '=') {
                 operator = input.textContent;
                 num1 = displayValue;
                 //displayValue = 0; // move this to number button section
-            } else if (operator == '' && input.text == '=') {
-                operator = '';
-            } else if (operator !== '=' || operator == '') {
+            } else if (operator == null && input.text == '=') {
+                operator = null;
+            } else if (operator !== '=' && num1 !== null) {
                 num2 = displayValue;
                 total = operate(num1,num2,operator);
                 updateDisplay(total);
