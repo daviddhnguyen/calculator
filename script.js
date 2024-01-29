@@ -64,7 +64,7 @@ function numberInput() {
     numbers.forEach(btnNum => {
         btnNum.addEventListener('click', () => {            
             //removes initial 0 value
-            if (displayValue == 0) {
+            if (displayValue == 0 || (operator !== '' && operator !== '=')) {
                 displayValue = '';
             }
             //resets calc if last operator was = and next button was number
@@ -111,14 +111,17 @@ function userOperator() {
             if (operator == '' && input.textContent !== '=') {
                 operator = input.textContent;
                 num1 = displayValue;
-                displayValue = 0;
-            } else if (operator !== '=') {
+                //displayValue = 0; // move this to number button section
+            } else if (operator == '' && input.text == '=') {
+                operator = '';
+            } else if (operator !== '=' || operator == '') {
                 num2 = displayValue;
                 total = operate(num1,num2,operator);
                 updateDisplay(total);
                 operator = input.textContent;
                 num1 = total;
-                displayValue = 0;
+                displayValue = total;
+                //displayValue = 0; // move this to number button section
             } else if (operator == '=') {
                 operator = input.textContent;
             }
