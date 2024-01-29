@@ -4,14 +4,14 @@ const DEFAULT_VALUE = 0;
 //start variables
 let num1
 let num2
-let totalFlag
+let total
 let operator
 let displayValue
 
 function startUp() {
     num1 = 0;
     num2 = 0;
-    totalFlag = false;
+    total = 0;
     operator = '';
     displayValue = DEFAULT_VALUE;
 };
@@ -21,7 +21,8 @@ function startUp() {
 //Startup
 window.addEventListener('DOMContentLoaded', () => {
     startUp();
-    clearDisplay();
+    clearAllDisplay();
+    clearNumber();
     numberInput();
     userOperator();
   });
@@ -63,14 +64,19 @@ function numberInput() {
     numbers.forEach(btnNum => {
         btnNum.addEventListener('click', () => {            
             //removes initial 0 value
-            if (displayValue == 0 || totalFlag == false) {
+            if (displayValue == 0) {
                 displayValue = '';
             }
+            //resets calc if last operator was = and next button was number
+            if (operator == '=') {
+                operator = '';
+            }
+
             //verifies only one decimal is allowed per entry
             if (btnNum.textContent !== '.' ||
             !displayValue.includes('.')) {
-            displayValue += btnNum.textContent;
-            updateDisplay(displayValue);
+                displayValue += btnNum.textContent;
+                updateDisplay(displayValue);
             };
         });
     });
@@ -81,40 +87,43 @@ function updateDisplay(text = DEFAULT_VALUE) {
     document.querySelector('.display').textContent = text;
 };
 
-function clearDisplay() {
-    document.querySelector('.clear').onclick = () => {
+function clearAllDisplay() {
+    document.querySelector('.allClear').onclick = () => {
         startUp();
         updateDisplay();
     }; 
 };
+
+function clearNumber() {
+    document.querySelector('.clear').onclick = () => {
+        displayValue = DEFAULT_VALUE;
+        updateDisplay(displayValue);
+    }; 
+}
 
 function userOperator() {
     const btnOperator = document.querySelectorAll('.operator');
 
     btnOperator.forEach(input => {
         input.addEventListener('click', () => {
-            console.log(input.textContent);
-            //any other operator that is not =
-            if (operator !== '' && input.textContent !== '=' && operator !== '=') {
-                num2 = displayValue;
-                displayValue = operate(num1, num2, operator)
-                num1 = displayValue;
-                totalFlag = true;
-                updateDisplay(displayValue)
-            } else if (operator !== '=' && input.textContent == '=') { //executes = operator
-                num2 = displayValue;
-                displayValue = operate(num1, num2, operator)
-                num1 = displayValue;
-                updateDisplay(displayValue)
-                operator = '';
-                totalFlag = false;
-            } else if (operator == '') {
-                num1 = totalFlag == false ? displayValue: num1;
+            //console.log(input.textContent);
+            //checks last operator and current operator input
+            if (operator == '' && input.textContent !== '=') {
                 operator = input.textContent;
-                displayValue = '';
-            }       
+                num1 = displayValue;
+                displayValue = 0;
+            } else if (operator !== '=') {
+                num2 = displayValue;
+                total = operate(num1,num2,operator);
+                updateDisplay(total);
+                operator = input.textContent;
+                num1 = total;
+                displayValue = 0;
+            } else if (operator == '=') {
+                operator = input.textContent;
+            }
         });
-    }); 
+    });
 };
 
 //display is 0
