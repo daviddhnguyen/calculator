@@ -2,12 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    border: none;
 }
 
 :root {
-    --main-color: red;
+    --btn-color: skyblue;
     --bg-color: #EAEDF0;
     --calc-bg-color: #F6F7F8;
+    --num-color: seagreen;
     font-size: clamp(0.5rem, 1rem, 2rem);
     font-family: 'Helvetica', 'Arial', sans-serif;
     font-weight: 1000;
@@ -39,7 +41,23 @@ body {
     text-align: right;
 }
 
+.buttonSect {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    justify-content: center;
+}
+
 button {
     width: 24%;
     height: 10vw;
+    background-color: var(--btn-color);
+}
+
+button+.number {
+    background-color: var(--num-color);
+}
+
+.zero {
+    width: 49%;
 }
