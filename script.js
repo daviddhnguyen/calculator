@@ -64,20 +64,21 @@ function numberInput() {
     numbers.forEach(btnNum => {
         btnNum.addEventListener('click', () => {            
             //removes initial 0 value
-            if (displayValue == 0 || (operator !== null && operator !== '=')) {
-                displayValue = '';
-            }
-            //resets calc if last operator was = and next button was number
-            if (operator == '=' && total == null) {
-                operator = null;
-            }
+                if (displayValue == 0 || (operator !== null && operator !== '=')) {
+                    displayValue = '';
+                }
+                //resets calc if last operator was = and next button was number
+                if (operator == '=' && total == null) {
+                    operator = null;
+                }
 
-            if (operator == '=' && total !== null) {
-                operator = null;
-                displayValue = '';
-            }
+                if (operator == '=' && total !== null) {
+                    operator = null;
+                    displayValue = '';
+                }
 
             //verifies only one decimal is allowed per entry
+            //not allowing 2nd decimal value to be added. Need to fix. 
             if (btnNum.textContent !== '.' ||
             !displayValue.includes('.')) {
                 displayValue += btnNum.textContent;
